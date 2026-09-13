@@ -32,8 +32,8 @@ const INITIAL_ITEMS = [
     "name": "Has Altın",
     "shortName": "Has Altın",
     "category": "gold",
-    "buyPrice": 6818.58,
-    "sellPrice": 6844.83,
+    "buyPrice": 6812.13,
+    "sellPrice": 6838.38,
     "unit": "Gram",
     "changeRate": 0.24,
     "isUp": false,
@@ -47,16 +47,16 @@ const INITIAL_ITEMS = [
       6825,
       6835.64
     ],
-    "prevSellPrice": 6849.24,
-    "prevBuyPrice": 6822.99
+    "prevSellPrice": 6844.16,
+    "prevBuyPrice": 6817.91
   },
   {
     "id": "22-ayar-bilezik",
     "name": "22 Ayar Bilezik",
     "shortName": "22 Ayar Bil.",
     "category": "gold",
-    "buyPrice": 6192.15,
-    "sellPrice": 6311.68,
+    "buyPrice": 6209.98,
+    "sellPrice": 6329.51,
     "unit": "Gram",
     "changeRate": 0.18,
     "isUp": true,
@@ -70,16 +70,16 @@ const INITIAL_ITEMS = [
       6300,
       6302.46
     ],
-    "prevSellPrice": 6308.54,
-    "prevBuyPrice": 6189.01
+    "prevSellPrice": 6326.15,
+    "prevBuyPrice": 6206.62
   },
   {
     "id": "22-ayar-hurda",
     "name": "22 Ayar Hurda",
     "shortName": "22 Ayar Hurda",
     "category": "gold",
-    "buyPrice": 6238.13,
-    "sellPrice": 6302.95,
+    "buyPrice": 6258.95,
+    "sellPrice": 6323.77,
     "unit": "Gram",
     "changeRate": 0.15,
     "isUp": false,
@@ -91,19 +91,19 @@ const INITIAL_ITEMS = [
       6238,
       6240.94
     ],
-    "prevSellPrice": 6304.4,
-    "prevBuyPrice": 6239.58
+    "prevSellPrice": 6325.56,
+    "prevBuyPrice": 6260.74
   },
   {
     "id": "eski-tam",
     "name": "Eski Tam Altın (Ziynet)",
     "shortName": "E. Tam Ziynet",
     "category": "ziynet",
-    "buyPrice": 45061.52,
-    "sellPrice": 45232.52,
+    "buyPrice": 45026.5,
+    "sellPrice": 45197.5,
     "unit": "Adet",
     "changeRate": 0.38,
-    "isUp": true,
+    "isUp": false,
     "history": [
       44100,
       44180,
@@ -112,16 +112,16 @@ const INITIAL_ITEMS = [
       44400,
       44432
     ],
-    "prevSellPrice": 45210.89,
-    "prevBuyPrice": 45039.89
+    "prevSellPrice": 45238.15,
+    "prevBuyPrice": 45067.15
   },
   {
     "id": "yeni-tam",
     "name": "Yeni Tam Altın (Ziynet)",
     "shortName": "Y. Tam Ziynet",
     "category": "ziynet",
-    "buyPrice": 44868.93,
-    "sellPrice": 45040.93,
+    "buyPrice": 44778.33,
+    "sellPrice": 44950.33,
     "unit": "Adet",
     "changeRate": 0.4,
     "isUp": false,
@@ -133,16 +133,16 @@ const INITIAL_ITEMS = [
       44600,
       44637
     ],
-    "prevSellPrice": 45080.75,
-    "prevBuyPrice": 44908.75
+    "prevSellPrice": 44974.82,
+    "prevBuyPrice": 44802.82
   },
   {
     "id": "yeni-yarim",
     "name": "Yeni Yarım Altın",
     "shortName": "Y. Yarım",
     "category": "ziynet",
-    "buyPrice": 22330.6,
-    "sellPrice": 22415.6,
+    "buyPrice": 22398.18,
+    "sellPrice": 22483.18,
     "unit": "Adet",
     "changeRate": 0.28,
     "isUp": true,
@@ -154,19 +154,19 @@ const INITIAL_ITEMS = [
       22300,
       22318
     ],
-    "prevSellPrice": 22406.63,
-    "prevBuyPrice": 22321.63
+    "prevSellPrice": 22470.64,
+    "prevBuyPrice": 22385.64
   },
   {
     "id": "eski-yarim",
     "name": "Eski Yarım Altın",
     "shortName": "E. Yarım",
     "category": "ziynet",
-    "buyPrice": 22286.96,
-    "sellPrice": 22371.96,
+    "buyPrice": 22392.69,
+    "sellPrice": 22477.69,
     "unit": "Adet",
     "changeRate": 0.25,
-    "isUp": false,
+    "isUp": true,
     "history": [
       22080,
       22110,
@@ -175,19 +175,19 @@ const INITIAL_ITEMS = [
       22200,
       22216
     ],
-    "prevSellPrice": 22386.93,
-    "prevBuyPrice": 22301.93
+    "prevSellPrice": 22456.23,
+    "prevBuyPrice": 22371.23
   },
   {
     "id": "eski-ceyrek",
     "name": "Eski Çeyrek Altın",
     "shortName": "E. Çeyrek",
     "category": "ziynet",
-    "buyPrice": 11362.2,
-    "sellPrice": 11405.2,
+    "buyPrice": 11341.05,
+    "sellPrice": 11384.05,
     "unit": "Adet",
     "changeRate": 0.32,
-    "isUp": true,
+    "isUp": false,
     "history": [
       11040,
       11060,
@@ -196,19 +196,19 @@ const INITIAL_ITEMS = [
       11100,
       11108
     ],
-    "prevSellPrice": 11401.35,
-    "prevBuyPrice": 11358.35
+    "prevSellPrice": 11389.18,
+    "prevBuyPrice": 11346.18
   },
   {
     "id": "yeni-ceyrek",
     "name": "Yeni Çeyrek Altın",
     "shortName": "Y. Çeyrek",
     "category": "ziynet",
-    "buyPrice": 11175.81,
-    "sellPrice": 11218.81,
+    "buyPrice": 11173.44,
+    "sellPrice": 11216.44,
     "unit": "Adet",
     "changeRate": 0.35,
-    "isUp": true,
+    "isUp": false,
     "isFavorite": true,
     "history": [
       11080,
@@ -218,19 +218,19 @@ const INITIAL_ITEMS = [
       11150,
       11159
     ],
-    "prevSellPrice": 11213.77,
-    "prevBuyPrice": 11170.77
+    "prevSellPrice": 11222.83,
+    "prevBuyPrice": 11179.83
   },
   {
     "id": "gumus-gram",
     "name": "Gümüş (Gram)",
     "shortName": "Gümüş",
     "category": "gold",
-    "buyPrice": 97.59,
-    "sellPrice": 105.15,
+    "buyPrice": 97.86,
+    "sellPrice": 105.42,
     "unit": "Gram",
     "changeRate": -0.12,
-    "isUp": false,
+    "isUp": true,
     "history": [
       105.2,
       105,
@@ -239,16 +239,16 @@ const INITIAL_ITEMS = [
       104.7,
       104.64
     ],
-    "prevSellPrice": 105.18,
-    "prevBuyPrice": 97.62
+    "prevSellPrice": 105.39,
+    "prevBuyPrice": 97.83
   },
   {
     "id": "usd-try",
     "name": "ABD Doları",
     "shortName": "USD",
     "category": "currency",
-    "buyPrice": 48.67,
-    "sellPrice": 48.73,
+    "buyPrice": 48.76,
+    "sellPrice": 48.82,
     "unit": "Döviz",
     "changeRate": 0.05,
     "isUp": true,
@@ -261,19 +261,19 @@ const INITIAL_ITEMS = [
       48.52,
       48.54
     ],
-    "prevSellPrice": 48.7,
-    "prevBuyPrice": 48.64
+    "prevSellPrice": 48.8,
+    "prevBuyPrice": 48.74
   },
   {
     "id": "eur-try",
     "name": "Euro",
     "shortName": "EUR",
     "category": "currency",
-    "buyPrice": 56.64,
-    "sellPrice": 56.72,
+    "buyPrice": 56.92,
+    "sellPrice": 57,
     "unit": "Döviz",
     "changeRate": 0.09,
-    "isUp": true,
+    "isUp": false,
     "history": [
       56.1,
       56.18,
@@ -282,8 +282,8 @@ const INITIAL_ITEMS = [
       56.35,
       56.38
     ],
-    "prevSellPrice": 56.7,
-    "prevBuyPrice": 56.62
+    "prevSellPrice": 57.01,
+    "prevBuyPrice": 56.93
   }
 ];
 
