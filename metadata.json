@@ -1,6 +1,4 @@
 {
-  "name": "Hatipoğlu Kuyumculuk iOS",
-  "description": "Hatipoğlu Kuyumculuk canlı altın, ziynet, gümüş ve döviz fiyat takip, grafik, alarm, hesaplama ve yönetim iOS uygulaması.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "name": "HATİPOĞLU KUYUMCULUK",
+  "description": "Kapalıçarşı Canlı Altın, Ziynet ve Döviz Fiyat Takip Sistemi"
 }
