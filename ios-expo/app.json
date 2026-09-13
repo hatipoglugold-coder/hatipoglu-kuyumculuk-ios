@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Hatipoglu Gold",
+    "slug": "hatipoglu-gold-ios",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#040711",
+    "splash": {
+      "backgroundColor": "#040711",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hatipoglu.gold",
+      "buildNumber": "1.0.0",
+      "userInterfaceStyle": "dark",
+      "infoPlist": {
+        "UIRequiresFullScreen": false,
+        "CFBundleDisplayName": "HATİPOĞLU",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.hatipoglu.gold.android",
+      "versionCode": 1
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.0"
+          }
+        }
+      ]
+    ]
+  }
+}
