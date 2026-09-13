@@ -51,7 +51,7 @@ export const GitHubSyncModal: React.FC<GitHubSyncModalProps> = ({
     () =>
       storeConfig.bundleIdentifier ||
       localStorage.getItem('hatipoglu_bundle_id') ||
-      'com.hatipoglu.kuyumculuk.ios'
+      'com.hatipoglu.gold'
   );
 
   const [isLoadingUser, setIsLoadingUser] = useState(false);
@@ -119,7 +119,7 @@ export const GitHubSyncModal: React.FC<GitHubSyncModalProps> = ({
       // 3. Push files with effective Codemagic configuration
       const effectiveConfig: StoreConfig = {
         ...storeConfig,
-        bundleIdentifier: bundleId.trim() || storeConfig.bundleIdentifier || 'com.hatipoglu.kuyumculuk.ios',
+        bundleIdentifier: bundleId.trim() || storeConfig.bundleIdentifier || 'com.hatipoglu.gold',
       };
       if (onUpdateStoreConfig) {
         onUpdateStoreConfig(effectiveConfig);
