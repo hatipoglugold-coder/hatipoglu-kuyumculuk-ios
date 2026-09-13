@@ -746,12 +746,16 @@ workflows:
             WORKSPACE=$(find ios -name "*.xcodeproj" -maxdepth 2 | head -n 1)
           fi
 
-          SCHEME=$(xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | head -n 1)
-          if [ -z "$SCHEME" ]; then
-            SCHEME=$(xcodebuild -project "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | head -n 1)
+          SCHEME="HatipogluGold"
+          if [ -n "$WORKSPACE" ]; then
+            BASE_NAME=$(basename "$WORKSPACE" | sed 's/\.[^.]*$//')
+            if [ -n "$BASE_NAME" ] && [ "$BASE_NAME" != "Pods" ]; then
+              SCHEME="$BASE_NAME"
+            fi
           fi
-          if [ -z "$SCHEME" ]; then
-            SCHEME="HATPOLUKUYUMCULUK"
+          REAL_SCHEME=$(xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | grep -E -v 'Pods|boost|React|Yoga|DoubleConversion|fmt|glog|folly|hermes|RCT|Expo' | head -n 1)
+          if [ -n "$REAL_SCHEME" ]; then
+            SCHEME="$REAL_SCHEME"
           fi
 
           echo "===> Building with Workspace/Project: $WORKSPACE"
@@ -905,12 +909,16 @@ workflows:
             WORKSPACE=$(find ios -name "*.xcodeproj" -maxdepth 2 | head -n 1)
           fi
 
-          SCHEME=$(xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | head -n 1)
-          if [ -z "$SCHEME" ]; then
-            SCHEME=$(xcodebuild -project "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | head -n 1)
+          SCHEME="HatipogluGold"
+          if [ -n "$WORKSPACE" ]; then
+            BASE_NAME=$(basename "$WORKSPACE" | sed 's/\.[^.]*$//')
+            if [ -n "$BASE_NAME" ] && [ "$BASE_NAME" != "Pods" ]; then
+              SCHEME="$BASE_NAME"
+            fi
           fi
-          if [ -z "$SCHEME" ]; then
-            SCHEME="HatipogluKuyumculukCanliAltinDoviz"
+          REAL_SCHEME=$(xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | awk '/Schemes:/{flag=1;next}/^$/{flag=0}flag' | tr -d ' ' | grep -E -v 'Pods|boost|React|Yoga|DoubleConversion|fmt|glog|folly|hermes|RCT|Expo' | head -n 1)
+          if [ -n "$REAL_SCHEME" ]; then
+            SCHEME="$REAL_SCHEME"
           fi
 
           echo "===> Building with Workspace/Project: $WORKSPACE"
