@@ -17,18 +17,13 @@
       "userInterfaceStyle": "dark",
       "infoPlist": {
         "UIRequiresFullScreen": false,
-        "CFBundleDisplayName": "Hatipoğlu Kuyumculuk",
+        "CFBundleDisplayName": "HATİPOĞLU",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "com.hatipoglu.gold.android",
       "versionCode": 1
-    },
-    "extra": {
-      "eas": {
-        "projectId": "7e6b8dc0-9e4a-4b95-a22a-8d7e01f5cf92"
-      }
     },
     "plugins": [
       [
