@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-luxury {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', -apple-system, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Gold Gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF5D0 0%, #F6D365 30%, #D4AF37 65%, #B78727 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-subtle {
+  background: linear-gradient(135deg, #FDE68A 0%, #EAB308 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* iOS Press & Glow */
+.ios-press {
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.12s ease;
+}
+
+.ios-press:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth Infinite Marquee Animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-infinite {
+  display: inline-flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: marquee-scroll 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
+/* Price Flash Animations */
+@keyframes price-flash-green {
+  0% {
+    background-color: rgba(16, 185, 129, 0.45);
+    color: #10B981;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+    transform: scale(1.05);
+  }
+  60% {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34D399;
+  }
+  100% {
+    background-color: transparent;
+    color: inherit;
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+@keyframes price-flash-red {
+  0% {
+    background-color: rgba(244, 63, 94, 0.45);
+    color: #F43F5E;
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.4);
+    transform: scale(1.05);
+  }
+  60% {
+    background-color: rgba(244, 63, 94, 0.2);
+    color: #FB7185;
+  }
+  100% {
+    background-color: transparent;
+    color: inherit;
+    box-shadow: none;
+    transform: scale(1);
+  }
+}
+
+.price-flash-up {
+  animation: price-flash-green 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  border-radius: 6px;
+}
+
+.price-flash-down {
+  animation: price-flash-red 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  border-radius: 6px;
+}
+
