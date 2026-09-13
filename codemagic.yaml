@@ -1,0 +1,102 @@
+workflows:
+  # 1. Ana İş Akışı: Apple Key ile Otomatik Sertifikalı IPA ve TestFlight
+  ios-app-store:
+    name: HATIPOGLU iOS App Store ve TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: AppleKey
+    environment:
+      vars:
+        BUNDLE_ID: "com.hatipoglu.gold"
+      node: 20
+      xcode: 16.2
+      cocoapods: default
+    scripts:
+      - name: Bağımlılıkları Yükle
+        script: |
+          npm install --legacy-peer-deps
+      - name: Temiz iOS Projesi Oluştur
+        script: |
+          rm -rf ios
+          CI=1 npx --yes expo prebuild --platform ios --clean --no-install
+      - name: CocoaPods Yükle
+        script: |
+          cd ios && pod install --repo-update
+      - name: Apple Sertifika ve Profillerini Getir
+        script: |
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          xcode-project use-profiles
+      - name: IPA Oluştur ve İmzala
+        script: |
+          WORKSPACE=$(find ios -name "*.xcworkspace" | head -n 1)
+          SCHEME=$(xcode-project list-schemes --workspace "$WORKSPACE" | head -n 1)
+          echo "Bulunan Workspace: $WORKSPACE, Scheme: $SCHEME"
+          xcode-project build-ipa --workspace "$WORKSPACE" --scheme "$SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+      email:
+        recipients:
+          - acal4551@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  # 2. Alternatif İş Akışı: Profil Gerektirmeyen Doğrudan IPA
+  ios-direct-ipa:
+    name: HATIPOGLU Direkt IPA Paketi (Profilsiz)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      vars:
+        BUNDLE_ID: "com.hatipoglu.gold"
+      node: 20
+      xcode: 16.2
+      cocoapods: default
+    scripts:
+      - name: Bağımlılıkları Yükle
+        script: |
+          npm install --legacy-peer-deps
+      - name: Temiz iOS Projesi Oluştur
+        script: |
+          rm -rf ios
+          CI=1 npx --yes expo prebuild --platform ios --clean --no-install
+      - name: CocoaPods Yükle
+        script: |
+          cd ios && pod install --repo-update
+      - name: Xcode Derlemesi Yap
+        script: |
+          mkdir -p build/ios/ipa build/ios/output
+          WORKSPACE=$(find ios -name "*.xcworkspace" | head -n 1)
+          SCHEME=$(xcode-project list-schemes --workspace "$WORKSPACE" | head -n 1)
+          echo "Workspace: $WORKSPACE, Scheme: $SCHEME"
+          xcodebuild \
+            -workspace "$WORKSPACE" \
+            -scheme "$SCHEME" \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            build \
+            CONFIGURATION_BUILD_DIR="$(pwd)/build/ios/output" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            COMPILER_INDEX_STORE_ENABLE=NO
+          
+          APP_PATH=$(find build/ios/output -name "*.app" | head -n 1)
+          mkdir -p /tmp/payload_dir/Payload
+          cp -R "$APP_PATH" /tmp/payload_dir/Payload/
+          cd /tmp/payload_dir
+          zip -r -9 "$CM_BUILD_DIR/build/ios/ipa/HatipogluGold.ipa" Payload
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - acal4551@gmail.com
+        notify:
+          success: true
+          failure: true
