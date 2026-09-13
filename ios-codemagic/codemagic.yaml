@@ -35,9 +35,8 @@ workflows:
           fi
       - name: 5. iOS IPA Dosyasını Oluştur ve İmzala
         script: |
-          mkdir -p build/ios/ipa build/ios/xcarchive
+          mkdir -p build/ios/ipa
           WORKSPACE=$(find ios -name "*.xcworkspace" -maxdepth 2 | head -n 1)
-          XCODE_PROJECT=$(find ios -name "*.xcodeproj" -maxdepth 2 | head -n 1)
           
           SCHEME="HatipogluGold"
           if ! xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | grep -q "$SCHEME"; then
@@ -50,22 +49,10 @@ workflows:
           echo "===> Hedef Workspace: $WORKSPACE"
           echo "===> Hedef Scheme: $SCHEME"
           
-          # Codemagic CLI ile otomatik profillerle IPA üret
+          # Codemagic resmi build-ipa komutu (otomatik imzalama ve ipa üretimi)
           xcode-project build-ipa \
             --workspace "$WORKSPACE" \
-            --scheme "$SCHEME" \
-            --output-dir "build/ios/ipa" || \
-          xcodebuild -workspace "$WORKSPACE" \
-            -scheme "$SCHEME" \
-            -configuration Release \
-            -destination 'generic/platform=iOS' \
-            -archivePath "build/ios/xcarchive/app.xcarchive" \
-            archive \
-            CODE_SIGNING_ALLOWED=NO \
-            COMPILER_INDEX_STORE_ENABLE=NO && \
-          app-store-connect export-archive \
-            --archive "build/ios/xcarchive/app.xcarchive" \
-            --output-directory "build/ios/ipa"
+            --scheme "$SCHEME"
           
           # IPA kontrolü
           IPA_COUNT=$(find build/ios/ipa -name "*.ipa" 2>/dev/null | wc -l)
