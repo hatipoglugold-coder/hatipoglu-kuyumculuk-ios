@@ -1,99 +1,70 @@
 <svg viewBox="0 0 250 220" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Rich 3D Gold Gradient for Main Face -->
-    <linearGradient id="goldMain" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFF9D8" />
-      <stop offset="15%" stop-color="#F9D768" />
-      <stop offset="38%" stop-color="#E3A528" />
-      <stop offset="65%" stop-color="#9F6B10" />
-      <stop offset="85%" stop-color="#DDA126" />
-      <stop offset="100%" stop-color="#784A04" />
+    <linearGradient id="hkGoldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FFF9D8" />
+      <stop offset="16%" stopColor="#F9D768" />
+      <stop offset="38%" stopColor="#E3A528" />
+      <stop offset="65%" stopColor="#9F6B10" />
+      <stop offset="85%" stopColor="#DDA126" />
+      <stop offset="100%" stopColor="#784A04" />
     </linearGradient>
-
-    <!-- Upper Arm Gradient (Sheen across the diagonal) -->
-    <linearGradient id="goldUpperArm" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#986610" />
-      <stop offset="24%" stop-color="#DFAB34" />
-      <stop offset="50%" stop-color="#FFFBD8" />
-      <stop offset="76%" stop-color="#F4CD5E" />
-      <stop offset="100%" stop-color="#784B04" />
+    <linearGradient id="hkGoldUpperArm" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#986610" />
+      <stop offset="24%" stopColor="#DFAB34" />
+      <stop offset="50%" stopColor="#FFFBD8" />
+      <stop offset="76%" stopColor="#F4CD5E" />
+      <stop offset="100%" stopColor="#784B04" />
     </linearGradient>
-
-    <!-- Lower Arm Gradient -->
-    <linearGradient id="goldLowerArm" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F6CF60" />
-      <stop offset="32%" stop-color="#FFF4BA" />
-      <stop offset="62%" stop-color="#C98F1D" />
-      <stop offset="100%" stop-color="#5D3702" />
+    <linearGradient id="hkGoldLowerArm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#F6CF60" />
+      <stop offset="32%" stopColor="#FFF4BA" />
+      <stop offset="62%" stopColor="#C98F1D" />
+      <stop offset="100%" stopColor="#5D3702" />
     </linearGradient>
-
-    <!-- Specular Highlight for Top and Left Bevels -->
-    <linearGradient id="specHighlight" x1="0%" y1="0%" x2="100%" y2="50%">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95" />
-      <stop offset="35%" stop-color="#FFF5BB" stop-opacity="0.85" />
-      <stop offset="70%" stop-color="#F2C753" stop-opacity="0.5" />
-      <stop offset="100%" stop-color="#B57B10" stop-opacity="0.1" />
+    <linearGradient id="hkSpecHighlight" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.95" />
+      <stop offset="35%" stopColor="#FFF5BB" stopOpacity="0.85" />
+      <stop offset="70%" stopColor="#F2C753" stopOpacity="0.5" />
+      <stop offset="100%" stopColor="#B57B10" stopOpacity="0.1" />
     </linearGradient>
-
-    <!-- Deep Bevel Shadow for Bottom and Right Faces -->
-    <linearGradient id="bevelShadow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#361E01" />
-      <stop offset="50%" stop-color="#5B3504" />
-      <stop offset="100%" stop-color="#88570C" />
+    <linearGradient id="hkBevelShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#361E01" />
+      <stop offset="50%" stopColor="#5B3504" />
+      <stop offset="100%" stopColor="#88570C" />
     </linearGradient>
-
-    <!-- Soft Drop Shadow for Realism -->
-    <filter id="monogramGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7A4B05" flood-opacity="0.45" />
+    <filter id="hkAmbientGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3.5" stdDeviation="3.5" floodColor="#7A4B05" floodOpacity="0.45" />
     </filter>
   </defs>
+  <g filter="url(#hkAmbientGlow)">
+    <path d="M 18,22 L 52,22 L 52,88 L 100,88 L 110,120 L 18,120 Z" fill="url(#hkGoldMain)" />
+    <polygon points="18,22 52,22 48,26 22,26" fill="url(#hkSpecHighlight)" />
+    <polygon points="18,22 18,120 22,116 22,26" fill="url(#hkSpecHighlight)" />
+    <polygon points="52,22 52,88 48,84 48,26" fill="url(#hkBevelShadow)" />
+    <polygon points="52,88 100,88 96,92 48,88" fill="url(#hkSpecHighlight)" />
+    <polygon points="100,88 110,120 106,116 96,92" fill="url(#hkBevelShadow)" />
+    <polygon points="18,120 110,120 106,116 22,116" fill="url(#hkBevelShadow)" />
 
-  <g filter="url(#monogramGlow)">
-    <!-- ========================================== -->
-    <!-- 1. TOP-LEFT 'L' SHAPE OF H                 -->
-    <!-- ========================================== -->
-    <path d="M 18,22 L 52,22 L 52,88 L 100,88 L 110,120 L 18,120 Z" fill="url(#goldMain)" />
-    <!-- Bevels -->
-    <polygon points="18,22 52,22 48,26 22,26" fill="url(#specHighlight)" />
-    <polygon points="18,22 18,120 22,116 22,26" fill="url(#specHighlight)" />
-    <polygon points="52,22 52,88 48,84 48,26" fill="url(#bevelShadow)" />
-    <polygon points="52,88 100,88 96,92 48,88" fill="url(#specHighlight)" />
-    <polygon points="100,88 110,120 106,116 96,92" fill="url(#bevelShadow)" />
-    <polygon points="18,120 110,120 106,116 22,116" fill="url(#bevelShadow)" />
+    <path d="M 18,132 L 52,132 L 52,196 L 18,196 Z" fill="url(#hkGoldMain)" />
+    <polygon points="18,132 52,132 48,136 22,136" fill="url(#hkSpecHighlight)" />
+    <polygon points="18,132 18,196 22,192 22,136" fill="url(#hkSpecHighlight)" />
+    <polygon points="52,132 52,196 48,192 48,136" fill="url(#hkBevelShadow)" />
+    <polygon points="18,196 52,196 48,192 22,192" fill="url(#hkBevelShadow)" />
 
-    <!-- ========================================== -->
-    <!-- 2. BOTTOM-LEFT STANDALONE BAR OF H         -->
-    <!-- ========================================== -->
-    <path d="M 18,132 L 52,132 L 52,196 L 18,196 Z" fill="url(#goldMain)" />
-    <!-- Bevels -->
-    <polygon points="18,132 52,132 48,136 22,136" fill="url(#specHighlight)" />
-    <polygon points="18,132 18,196 22,192 22,136" fill="url(#specHighlight)" />
-    <polygon points="52,132 52,196 48,192 48,136" fill="url(#bevelShadow)" />
-    <polygon points="18,196 52,196 48,192 22,192" fill="url(#bevelShadow)" />
+    <path d="M 118,22 L 146,22 L 146,94 L 196,22 L 226,22 L 118,168 Z" fill="url(#hkGoldUpperArm)" />
+    <polygon points="118,22 146,22 142,26 122,26" fill="url(#hkSpecHighlight)" />
+    <polygon points="118,22 118,168 122,164 122,26" fill="url(#hkSpecHighlight)" />
+    <polygon points="146,22 146,94 142,90 142,26" fill="url(#hkBevelShadow)" />
+    <polygon points="146,94 196,22 198,26 148,96" fill="url(#hkSpecHighlight)" />
+    <polygon points="196,22 226,22 222,26 198,26" fill="url(#hkSpecHighlight)" />
+    <polygon points="226,22 118,168 122,164 222,26" fill="url(#hkBevelShadow)" />
 
-    <!-- ========================================== -->
-    <!-- 3. CENTRAL STEM & UPPER ARM WITH V-POINT   -->
-    <!-- ========================================== -->
-    <path d="M 118,22 L 146,22 L 146,94 L 196,22 L 226,22 L 118,168 Z" fill="url(#goldUpperArm)" />
-    <!-- Bevels -->
-    <polygon points="118,22 146,22 142,26 122,26" fill="url(#specHighlight)" />
-    <polygon points="118,22 118,168 122,164 122,26" fill="url(#specHighlight)" />
-    <polygon points="146,22 146,94 142,90 142,26" fill="url(#bevelShadow)" />
-    <polygon points="146,94 196,22 198,26 148,96" fill="url(#specHighlight)" />
-    <polygon points="196,22 226,22 222,26 198,26" fill="url(#specHighlight)" />
-    <polygon points="226,22 118,168 122,164 222,26" fill="url(#bevelShadow)" />
+    <path d="M 176,112 L 236,196 L 204,196 L 148,132 Z" fill="url(#hkGoldLowerArm)" />
+    <polygon points="148,132 176,112 178,116 152,134" fill="url(#hkSpecHighlight)" />
+    <polygon points="176,112 236,196 232,192 178,116" fill="url(#hkSpecHighlight)" />
+    <polygon points="236,196 204,196 207,192 232,192" fill="url(#hkBevelShadow)" />
+    <polygon points="204,196 148,132 152,134 207,192" fill="url(#hkBevelShadow)" />
 
-    <!-- ========================================== -->
-    <!-- 4. LOWER DIAGONAL ARM OF K                 -->
-    <!-- ========================================== -->
-    <path d="M 176,112 L 236,196 L 204,196 L 148,132 Z" fill="url(#goldLowerArm)" />
-    <!-- Bevels -->
-    <polygon points="148,132 176,112 178,116 152,134" fill="url(#specHighlight)" />
-    <polygon points="176,112 236,196 232,192 178,116" fill="url(#specHighlight)" />
-    <polygon points="236,196 204,196 207,192 232,192" fill="url(#bevelShadow)" />
-    <polygon points="204,196 148,132 152,134 207,192" fill="url(#bevelShadow)" />
-
-    <!-- Diamond glint star on the upper branch -->
     <circle cx="146" cy="94" r="3" fill="#FFFFFF" opacity="0.9" />
     <polygon points="146,87 148,94 155,94 149,97 151,103 146,99 141,103 143,97 137,94 144,94" fill="#FFFDE8" opacity="0.8" />
   </g>
