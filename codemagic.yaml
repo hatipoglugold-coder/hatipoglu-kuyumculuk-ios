@@ -28,11 +28,20 @@ workflows:
           keychain initialize
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           keychain add-certificates
-          xcode-project use-profiles
+          MAIN_XCODEPROJ=$(find ios -maxdepth 1 -name "*.xcodeproj" 2>/dev/null | head -n 1)
+          if [ -n "$MAIN_XCODEPROJ" ]; then
+            echo "Signing main Xcode project: $MAIN_XCODEPROJ"
+            xcode-project use-profiles --project "$MAIN_XCODEPROJ"
+          else
+            xcode-project use-profiles
+          fi
       - name: 5. iOS IPA Dosyasını Oluştur ve İmzala
         script: |
           mkdir -p build/ios/ipa
-          WORKSPACE=$(find ios -name "*.xcworkspace" -maxdepth 2 | head -n 1)
+          WORKSPACE=$(find ios -maxdepth 1 -name "*.xcworkspace" 2>/dev/null | head -n 1)
+          if [ -z "$WORKSPACE" ]; then
+            WORKSPACE=$(find ios -name "*.xcworkspace" -maxdepth 2 | head -n 1)
+          fi
           
           SCHEME="HatipogluGold"
           if ! xcodebuild -workspace "$WORKSPACE" -list 2>/dev/null | grep -q "$SCHEME"; then
