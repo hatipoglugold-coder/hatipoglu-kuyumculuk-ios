@@ -207,11 +207,11 @@ export const defaultMultiplierCards: MultiplierFormulaCard[] = [
 
 export const defaultFormulaConfig: JewelryFormulaConfig = {
   troyOunce: 31.1034768,
-  onsUsd: 4330.9,
-  usdTry: 48.6230,
-  eurTry: 56.4200,
-  hasBuyPrice: 6729.00,
-  hasSellPrice: 6768.00,
+  onsUsd: 3345.5,
+  usdTry: 63.02,
+  eurTry: 68.45,
+  hasBuyPrice: 6772.50,
+  hasSellPrice: 6785.00,
   autoSyncWithLiveMarket: true,
   cards: defaultMultiplierCards,
 };
@@ -253,10 +253,14 @@ export function calculatePricesFromFormula(
   // Has Altın Spot Gram (TL) = (ONS * USD) / 31.1034768
   const spotHasPrice = Math.round(((ons * usd) / troy) * 100) / 100;
 
-  // If live items have Has Altın, use its actual live buy/sell or calculate from spot
+  // Has Altın Baz Fiyatı: Kullanıcının girdiği/ayarladığı Has fiyatı önceliklidir
   const existingHas = currentItems?.find((i) => i.id === 'has-altin');
-  const effectiveHasBuy = existingHas?.buyPrice || config.hasBuyPrice || Math.round(spotHasPrice * 0.994 * 100) / 100;
-  const effectiveHasSell = existingHas?.sellPrice || config.hasSellPrice || Math.round(spotHasPrice * 1.000 * 100) / 100;
+  const effectiveHasBuy = (config.hasBuyPrice && config.hasBuyPrice > 0)
+    ? config.hasBuyPrice
+    : (existingHas?.buyPrice || Math.round(spotHasPrice * 0.994 * 100) / 100);
+  const effectiveHasSell = (config.hasSellPrice && config.hasSellPrice > 0)
+    ? config.hasSellPrice
+    : (existingHas?.sellPrice || Math.round(spotHasPrice * 1.000 * 100) / 100);
 
   const calculatedItems: CalculatedItemPrice[] = config.cards.map((card) => {
     const storeItem = currentItems?.find((i) => i.id === card.targetItemId);
