@@ -22,8 +22,11 @@ import { Bell, CheckCircle2 } from 'lucide-react';
 
 export default function App() {
   const [items, setItems] = useState<GoldItem[]>(() => {
+    const CURRENT_VERSION = '2026-09-14-v4';
+    const savedVersion = localStorage.getItem('hatipoglu_gold_version');
     const saved = localStorage.getItem('hatipoglu_gold_items');
-    if (saved) {
+
+    if (saved && savedVersion === CURRENT_VERSION) {
       try {
         const parsed: GoldItem[] = JSON.parse(saved);
         const filtered = parsed.filter((i) => i.id !== '14-ayar' && i.id !== '18-ayar' && i.id !== 'ata-lira');
@@ -38,6 +41,9 @@ export default function App() {
         return initialGoldItems;
       }
     }
+    // Set current version and initialize with updated market prices
+    localStorage.setItem('hatipoglu_gold_version', CURRENT_VERSION);
+    localStorage.setItem('hatipoglu_gold_items', JSON.stringify(initialGoldItems));
     return initialGoldItems;
   });
 
