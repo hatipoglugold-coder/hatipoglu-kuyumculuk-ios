@@ -889,17 +889,18 @@ workflows:
           fi
       - name: Set up Code Signing
         script: |
-          node scripts/prepare-export-options.js 2>/dev/null || true
-          mkdir -p /Users/builder build/ios/ipa build/ios/xcarchive
-          cp export_options.plist /Users/builder/export_options.plist 2>/dev/null || true
-
-          # Otomatik Apple Developer sertifika ve profillerini çek
+          keychain initialize
           app-store-connect fetch-signing-files "$BUNDLE_ID" \\
             --type IOS_APP_STORE \\
-            --create || true
-
-          # Profilleri Xcode projesine bağla
-          xcode-project use-profiles 2>/dev/null || true
+            --create
+          keychain add-certificates
+          MAIN_XCODEPROJ=$(find ios -maxdepth 1 -name "*.xcodeproj" 2>/dev/null | head -n 1)
+          if [ -n "$MAIN_XCODEPROJ" ]; then
+            echo "Signing main Xcode project: $MAIN_XCODEPROJ"
+            xcode-project use-profiles --project "$MAIN_XCODEPROJ"
+          else
+            xcode-project use-profiles
+          fi
       - name: Build and Sign iOS IPA
         script: |
           mkdir -p build/ios/ipa build/ios/xcarchive /Users/builder
