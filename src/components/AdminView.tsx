@@ -421,12 +421,14 @@ export const AdminView: React.FC<AdminViewProps> = ({
               type="number"
               step="0.1"
               value={formulaConfig.hasBuyPrice}
-              onChange={(e) =>
-                setFormulaConfig({
-                  ...formulaConfig,
-                  hasBuyPrice: parseFloat(e.target.value) || 0,
-                })
-              }
+              onChange={(e) => {
+                const val = parseFloat(e.target.value) || 0;
+                setFormulaConfig((prev) => {
+                  const next = { ...prev, hasBuyPrice: val };
+                  localStorage.setItem('hatipoglu_formula_config_v2', JSON.stringify(next));
+                  return next;
+                });
+              }}
               className={`w-full rounded-lg px-2 py-1 text-sm font-black font-mono-num focus:outline-none ${
                 isDarkMode
                   ? 'bg-[#060A16] border border-[#1C2C4A] text-emerald-400'
@@ -447,12 +449,14 @@ export const AdminView: React.FC<AdminViewProps> = ({
               type="number"
               step="0.1"
               value={formulaConfig.hasSellPrice}
-              onChange={(e) =>
-                setFormulaConfig({
-                  ...formulaConfig,
-                  hasSellPrice: parseFloat(e.target.value) || 0,
-                })
-              }
+              onChange={(e) => {
+                const val = parseFloat(e.target.value) || 0;
+                setFormulaConfig((prev) => {
+                  const next = { ...prev, hasSellPrice: val };
+                  localStorage.setItem('hatipoglu_formula_config_v2', JSON.stringify(next));
+                  return next;
+                });
+              }}
               className={`w-full rounded-lg px-2 py-1 text-sm font-black font-mono-num focus:outline-none ${
                 isDarkMode
                   ? 'bg-[#060A16] border border-[#1C2C4A] text-amber-400'
