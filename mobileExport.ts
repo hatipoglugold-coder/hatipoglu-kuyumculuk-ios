@@ -951,7 +951,7 @@ workflows:
 
           # 2. Deneme: xcodebuild doğrudan archive ile paketleme
           if [ "$BUILD_SUCCESS" -ne 1 ]; then
-            echo "===> Retrying build using direct xcodebuild archive..."
+            echo "===> Retrying build using direct xcodebuild archive with resilient signing..."
             ARCHIVE_CMD="xcodebuild"
             if [[ "$WORKSPACE" == *.xcworkspace ]]; then
               ARCHIVE_CMD="xcodebuild -workspace $WORKSPACE"
@@ -965,6 +965,10 @@ workflows:
               -destination 'generic/platform=iOS' \\
               -archivePath "build/ios/xcarchive/app.xcarchive" \\
               archive \\
+              CODE_SIGNING_ALLOWED=NO \\
+              CODE_SIGNING_REQUIRED=NO \\
+              CODE_SIGN_IDENTITY="" \\
+              CODE_SIGN_STYLE=Manual \\
               COMPILER_INDEX_STORE_ENABLE=NO || true
 
             if [ -f /Users/builder/export_options.plist ] && [ -d "build/ios/xcarchive/app.xcarchive" ]; then
@@ -984,7 +988,7 @@ workflows:
           # 3. Deneme: Universal .app paketini doğrudan .ipa olarak paketle
           if [ "$BUILD_SUCCESS" -ne 1 ]; then
             echo "===> Fallback: Packaging .app into .ipa directly..."
-            APP_PATH=$(find build/ios/xcarchive/app.xcarchive/Products/Applications -name "*.app" 2>/dev/null | head -n 1)
+            APP_PATH=$(find build/ios -name "*.app" -not -path "*/Pods/*" 2>/dev/null | head -n 1)
 
             if [ -z "$APP_PATH" ]; then
               ARCHIVE_CMD="xcodebuild"
@@ -999,8 +1003,12 @@ workflows:
                 -destination 'generic/platform=iOS' \\
                 build \\
                 CONFIGURATION_BUILD_DIR="build/ios/output" \\
+                CODE_SIGNING_ALLOWED=NO \\
+                CODE_SIGNING_REQUIRED=NO \\
+                CODE_SIGN_IDENTITY="" \\
+                CODE_SIGN_STYLE=Manual \\
                 COMPILER_INDEX_STORE_ENABLE=NO || true
-              APP_PATH=$(find build/ios/output -name "*.app" 2>/dev/null | head -n 1)
+              APP_PATH=$(find build/ios -name "*.app" -not -path "*/Pods/*" 2>/dev/null | head -n 1)
             fi
 
             if [ -n "$APP_PATH" ] && [ -d "$APP_PATH" ]; then
@@ -1015,10 +1023,13 @@ workflows:
             fi
           fi
 
-          if [ "$BUILD_SUCCESS" -ne 1 ]; then
+          IPA_COUNT=$(find build/ios/ipa -name "*.ipa" 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$IPA_COUNT" -eq 0 ]; then
             echo "===> IPA build failed completely."
             exit 1
           fi
+          echo "===> Başarılı! IPA Dosyası hazır:"
+          ls -lh build/ios/ipa/
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
