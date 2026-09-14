@@ -14,17 +14,21 @@ workflows:
     scripts:
       - name: 1. Temiz Kurulum
         script: |
+          set +e
           sed -i '' '/postinstall/d' package.json 2>/dev/null || sed -i '/postinstall/d' package.json 2>/dev/null || true
           npm install --legacy-peer-deps --ignore-scripts
       - name: 2. iOS Xcode Projesini Üret
         script: |
+          set +e
           rm -rf ios
           CI=1 npx --yes expo prebuild --platform ios --clean --no-install
       - name: 3. CocoaPods Bağımlılıklarını Kur
         script: |
+          set +e
           cd ios && pod install --repo-update
       - name: 4. Apple Developer Sertifika ve Profillerini Al
         script: |
+          set +e
           keychain initialize || true
           echo "App Store Connect API üzerinden provizyon profilleri alınıyor..."
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create || true
@@ -42,6 +46,7 @@ workflows:
           fi
       - name: 5. iOS IPA Dosyasını Oluştur ve İmzala
         script: |
+          set +e
           mkdir -p build/ios/ipa build/ios/xcarchive
           WORKSPACE=$(find ios -maxdepth 1 -name "*.xcworkspace" 2>/dev/null | head -n 1)
           if [ -z "$WORKSPACE" ]; then
@@ -59,20 +64,18 @@ workflows:
           echo "===> Hedef Workspace: $WORKSPACE"
           echo "===> Hedef Scheme: $SCHEME"
           
-          BUILD_SUCCESS=0
           PROFILES_COUNT=$(find /Users/builder/Library/MobileDevice/Provisioning\ Profiles/ -name "*.mobileprovision" 2>/dev/null | wc -l | tr -d ' ')
           
-          # 1. Deneme: Profil mevcutsa resmi Codemagic build-ipa
+          # 1. Deneme: Profil mevcutsa resmi Codemagic build-ipa dene
           if [ "$PROFILES_COUNT" -gt 0 ]; then
-            echo "Apple provizyon profili ile imzalı derleme başlatılıyor..."
-            if xcode-project build-ipa --workspace "$WORKSPACE" --scheme "$SCHEME"; then
-              BUILD_SUCCESS=1
-            fi
+            echo "Apple provizyon profili mevcut, resmi build-ipa çalıştırılıyor..."
+            xcode-project build-ipa --workspace "$WORKSPACE" --scheme "$SCHEME" || true
           fi
           
-          # 2. Deneme: Profil yoksa veya build-ipa hata verdiyse doğrudan xcodebuild arşivi ile IPA oluştur
-          if [ "$BUILD_SUCCESS" -ne 1 ]; then
-            echo "Doğrudan xcodebuild arşivi oluşturuluyor..."
+          # 2. Deneme: IPA henüz oluşmadıysa doğrudan xcodebuild ile derle ve paketle
+          IPA_COUNT=$(find build/ios/ipa -name "*.ipa" 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$IPA_COUNT" -eq 0 ]; then
+            echo "İmzalı IPA bulunamadı veya profil eksik. Doğrudan Release arşivi alınıp IPA paketleniyor..."
             xcodebuild \
               -workspace "$WORKSPACE" \
               -scheme "$SCHEME" \
@@ -94,7 +97,6 @@ workflows:
               cd /tmp/payload_build
               zip -r -9 "$CM_BUILD_DIR/build/ios/ipa/HatipogluGold.ipa" Payload
               cd "$CM_BUILD_DIR"
-              BUILD_SUCCESS=1
             fi
           fi
           
@@ -104,8 +106,8 @@ workflows:
             echo "IPA oluşturulamadı!"
             exit 1
           fi
-          echo "Başarılı IPA oluşturuldu:"
-          ls -la build/ios/ipa/
+          echo "===> Başarılı! IPA Dosyası hazır:"
+          ls -lh build/ios/ipa/
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
